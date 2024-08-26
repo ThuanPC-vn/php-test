@@ -17,28 +17,28 @@ if(navClose){
     })
 }
 
-/*=============== SHOW MENU PRODUCTS ===============*/
-const proMenu = document.getElementById('show-pro-menu'),
-      proToggle = document.getElementById('toggle-pro'),
-      proClose = document.getElementById('close-pro')
+// /*=============== SHOW MENU PRODUCTS ===============*/
+// const proMenu = document.getElementById('show-pro-menu'),
+//       proToggle = document.getElementById('toggle-pro'),
+//       proClose = document.getElementById('close-pro')
 
-/* Menu show */
-if(proToggle){
-    proToggle.addEventListener('click', () =>{
-      proMenu.classList.add('show-pro-menu');
-      proToggle.style.display = 'none';
-      proClose.style.display = 'inline-block';
-    })
-}
+// /* Menu show */
+// if(proToggle){
+//     proToggle.addEventListener('click', () =>{
+//       proMenu.classList.add('show-pro-menu');
+//       proToggle.style.display = 'none';
+//       proClose.style.display = 'inline-block';
+//     })
+// }
 
-/* Menu hidden */
-if(proClose){
-    proClose.addEventListener('click', () =>{
-      proMenu.classList.remove('show-pro-menu');
-      proClose.style.display = 'none';
-      proToggle.style.display = 'inline-block';
-    })
-}
+// /* Menu hidden */
+// if(proClose){
+//     proClose.addEventListener('click', () =>{
+//       proMenu.classList.remove('show-pro-menu');
+//       proClose.style.display = 'none';
+//       proToggle.style.display = 'inline-block';
+//     })
+// }
 
 
 /*=============== REMOVE MENU MOBILE ===============*/
@@ -116,7 +116,35 @@ let swiperProduct = new Swiper('.products__container',{
             spaceBetween: 48,
         },
     },
-  })
+  });
+
+
+  
+/*=============== DETAIL PRODUCT ANIMATION ===============*/
+const allHoverImages = document.querySelectorAll('.hover-container div img');
+const imgContainer = document.querySelector('.img-container');
+
+window.addEventListener('DOMContentLoaded', () => {
+    allHoverImages[0].parentElement.classList.add('active-product-detail');
+});
+
+allHoverImages.forEach((image) => {
+    image.addEventListener('mouseover', () =>{
+        imgContainer.querySelector('img').src = image.src;
+        resetActiveImg();
+        image.parentElement.classList.add('active-product-detail');
+    });
+});
+
+function resetActiveImg(){
+    allHoverImages.forEach((img) => {
+        img.parentElement.classList.remove('active-product-detail');
+    });
+}
+
+
+
+
 
 /*=============== SHOW SCROLL UP ===============*/ 
 const scrollUp = () =>{
@@ -161,18 +189,10 @@ searchBtn.addEventListener('click', () =>{
 /* Search hide */
 searchClose.addEventListener('click', () =>{
     search.classList.remove('show-search')
-})
-
-
-/*=============== MIXITUP FILTER ALLPRODUCTS ===============*/
-let mixerAllProducts = mixitup('.pro__all__content', {
-    selectors: {
-        target: '.pro__all__card'
-    },
-    animation: {
-        duration: 300
-    }
 });
+
+
+
 
 /* Link active featured */
 const linkAllProducts = document.querySelectorAll('.pro__all__item')
@@ -225,9 +245,23 @@ const sr = ScrollReveal({
 })
 
 sr.reveal(`.home__social, .products__container`)
-sr.reveal(`.home__title span:nth-child(1),  .pro__all`, {origin: 'left', opacity: 0})
+sr.reveal(`.home__title span:nth-child(1),  .pro__all, .product-div`, {origin: 'left', opacity: 0})
 sr.reveal(`.home__title span:nth-child(3),`, {origin: 'top', opacity: 1})
 sr.reveal(`.home__title span:nth-child(5)`, {origin: 'right', opacity: 1})
 sr.reveal(`.home__tooltip, .home__button, .model__button`, {origin: 'bottom'})
 sr.reveal(`.about__data`, {origin: 'left'})
 sr.reveal(`.about__img, .model__tooltip`, {origin: 'right'})
+
+
+
+
+
+/*=============== MIXITUP FILTER ALLPRODUCTS ===============*/
+// let mixerAllProducts = mixitup('.pro__all__content', {
+//     selectors: {
+//         target: '.pro__all__card'
+//     },
+//     animation: {
+//         duration: 300
+//     }
+// });

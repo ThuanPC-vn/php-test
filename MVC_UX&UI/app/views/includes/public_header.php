@@ -16,6 +16,7 @@
       <!--=============== CSS ===============-->
       <link rel="stylesheet" type="text/css" href="resources/css/styles.css">
       <link rel="stylesheet" type="text/css" href="resources/css/screen.css">
+      <link rel="stylesheet" type="text/css" href="resources/css/cssDetailProduct.css">
 
       <title>TTAN.STORE</title>
    </head>
@@ -32,7 +33,7 @@
                   <ul class="nav__list">
 
                      <li class="">
-                        <a href="#" class="nav__link">Home</a>
+                        <a href="index.php" class="nav__link">Home</a>
                      </li>
 
                      <!--==================== Products Dropdown ====================-->

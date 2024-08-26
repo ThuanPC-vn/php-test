@@ -101,6 +101,9 @@
       <!--=============== MIXITUP JS ===============-->
       <script src="resources/js/mixitup.min.js"></script>
 
+      <!--=============== DETAILPRODUCT JS ===============-->
+      <script src="resources/js/jsDetailProduct.js"></script>
+
       <!--=============== MAIN JS ===============-->
       <script src="resources/js/main.js"></script>
    </body>
