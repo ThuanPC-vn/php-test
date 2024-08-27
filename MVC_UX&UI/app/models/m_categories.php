@@ -42,25 +42,58 @@ class Categories
     }
 
     public function getCategoryNav($active)
-    {
+    {   
+        print_r($active);
         $categories = $this->getCategories();
 
         $data = '<li><button class="pro__all__item ';
         if (strtolower($active) === 'all') {
             $data .= 'active-pro-all" ';
         }
-        $data .= 'data-filter="' . SITE_PATH . '"><span>ALL</span></button></li>';
+        $data .= 'data-filter="' . SITE_PATH . '><span>ALL</span>';
 
         if (!empty($categories)) {
             foreach ($categories as $category) {
-                $data .= '<li><button class="pro__all__item ';
-                if (strtolower($active) === strtolower($category['name'])) {
+                $data = '<li><button class="pro__all__item ';
+                if (strtolower($active) === strtolower($active['name_category'])) {
                     $data .= 'active-pro-all" ';
                 }
-                $data .= 'data-filter="' . SITE_PATH . 'index.php?id=' . $category['id'] . '"><span>' . htmlspecialchars($category['name']) . '</span></button></li>';
+                $data .= 'data-filter="' . SITE_PATH . '><span>' . htmlspecialchars($category['name']) . '</span>';
             }
         }
 
         return $data;
     }
+
+    // <li>
+    //                        <button class="pro__all__item active-pro-all" data-filter="all">
+    //                           <span>ALL</span>
+    //                        </button>
+    //                     </li>
+
+    //                     <li>
+    //                        <button class="pro__all__item">
+    //                           <span><i class="ri-computer-line"></i> PC</span>
+    //                        </button>
+    //                     </li>
+
+
+    //                     <li>
+    //                        <button class="pro__all__item">
+    //                           <span><i class="ri-macbook-line"></i> LAPTOP</span>
+    //                        </button>
+    //                     </li>
+
+    //                     <li>
+    //                        <button class="pro__all__item">
+    //                           <span><i class="ri-gamepad-line"></i> GAMING</span>
+    //                        </button>
+    //                     </li>
+
+
+    //                     <li>
+    //                        <button class="pro__all__item">
+    //                           <span><i class="ri-home-office-line"></i> OFFCIE</span>
+    //                        </button>
+    //                     </li>
 }
