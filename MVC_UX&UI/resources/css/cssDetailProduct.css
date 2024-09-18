@@ -76,7 +76,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     background-color: var(--pro-menu);
-    border-radius: 3px;
+    border-radius: 1rem;
     column-gap: 10px;
 }
 .product-div-left{
@@ -99,7 +99,7 @@
 .hover-container div{
     border: 2px solid rgba(252, 160, 175, 0.7);
     padding: 1rem;
-    border-radius: 3px;
+    border-radius: .45rem;
     margin: 0 4px 8px 4px;
     display: flex;
     align-items: center;
@@ -171,6 +171,7 @@
     background-color: #FF9F00;
     border: 2px solid #FF9F00;
     margin-right: 8px;
+    border-radius: 2rem;
 }
 .add-cart-btn:hover{
     background-color: #fff;
@@ -179,6 +180,7 @@
 .buy-now-btn{
     background-color: #000;
     border: 2px solid #000;
+    border-radius: 2rem;
 }
 .buy-now-btn:hover{
     background-color: #fff;

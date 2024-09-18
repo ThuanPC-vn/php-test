@@ -246,8 +246,8 @@ const sr = ScrollReveal({
 
 sr.reveal(`.home__social, .products__container`)
 sr.reveal(`.home__title span:nth-child(1),  .pro__all, .product-div`, {origin: 'left', opacity: 0})
-sr.reveal(`.home__title span:nth-child(3),`, {origin: 'top', opacity: 1})
-sr.reveal(`.home__title span:nth-child(5)`, {origin: 'right', opacity: 1})
+sr.reveal(`.home__title span:nth-child(3),`, {origin: 'top', opacity: 0})
+sr.reveal(`.home__title span:nth-child(5),  .checkoutLayout`, {origin: 'right', opacity: 1})
 sr.reveal(`.home__tooltip, .home__button, .model__button`, {origin: 'bottom'})
 sr.reveal(`.about__data`, {origin: 'left'})
 sr.reveal(`.about__img, .model__tooltip`, {origin: 'right'})

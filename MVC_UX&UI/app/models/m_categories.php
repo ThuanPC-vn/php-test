@@ -16,17 +16,26 @@ class Categories
     {
         $data = array();
         if ($id != null) {
+
             $id = mysqli_real_escape_string($this->Database, $id);
 
-            $result = $this->Database->query("SELECT id_category, name_category FROM " . $this->db_table . " WHERE id_category IN ($id) LIMIT 1");
+            $stmt = $this->Database->prepare("SELECT id_category, name_category FROM " . $this->db_table . " WHERE id_category IN ($id) LIMIT 1");
 
-            if ($result) {
-                if (mysqli_num_rows($result) > 0) {
-                    $row = mysqli_fetch_assoc($result);
-                    $data = array('id' => $row['id_category'], 'name_category' => $row['name_category']);
+            if ($stmt) {
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+                    $cat_id = null;
+                    $cat_name = null;
+                    $stmt->bind_result($cat_id, $cat_name);
+                    $stmt->fetch();
+                    $data = array('id' => $cat_id, 'name' => $cat_name);
                 }
-                $result->close();
+                $stmt->close();
             }
+
         } else {
             $result = $this->Database->query("SELECT id_category, name_category FROM " . $this->db_table);
             if ($result) {
@@ -40,60 +49,54 @@ class Categories
 
         return $data;
     }
+    
 
     public function getCategoryNav($active)
-    {   
-        print_r($active);
+    {
         $categories = $this->getCategories();
 
-        $data = '<li><button class="pro__all__item ';
-        if (strtolower($active) === 'all') {
-            $data .= 'active-pro-all" ';
-        }
-        $data .= 'data-filter="' . SITE_PATH . '><span>ALL</span>';
+        $data = '';
+        // if (strtolower($active) === 'all') {
+        //     $data .= 'active-pro-all" ';
+        // }
+        // $data .= 'data-filter="' . SITE_PATH . '"><span>ALL</span></button></li>';
+
+        
 
         if (!empty($categories)) {
             foreach ($categories as $category) {
-                $data = '<li><button class="pro__all__item ';
-                if (strtolower($active) === strtolower($active['name_category'])) {
-                    $data .= 'active-pro-all" ';
+
+                $classNameIcon = '';
+                switch (htmlspecialchars($category['name'])) {
+                    case 'PC':
+                        $classNameIcon = 'ri-computer-line';
+                        break;
+                    case 'LAPTOP':
+                        $classNameIcon = 'ri-macbook-line';
+                        break;
+                    case 'GAMING':
+                        $classNameIcon = 'ri-gamepad-line';
+                        break;
+                    case 'OFFICE':
+                        $classNameIcon = 'ri-home-office-line';
+                        break;
+                    default:
+                        $classNameIcon = '';
+                        break;
                 }
-                $data .= 'data-filter="' . SITE_PATH . '><span>' . htmlspecialchars($category['name']) . '</span>';
+
+                $data .= '<li><button class="pro__all__item ';
+                if (strtolower($active) === strtolower($category['name'])) {
+                    $data .= 'active-pro-all" data-filter="' . SITE_PATH . 'index.php?id=' . $category['id'] . '"><span><i class="' . $classNameIcon . '"></i> ' . htmlspecialchars($category['name']) . '</span></button></li>';
+                }
+                else{
+                    $data .= '"data-filter="' . SITE_PATH . 'index.php?id=' . $category['id'] . '"><span><i class="' . $classNameIcon . '"></i> ' . htmlspecialchars($category['name']) . '</span></button></li>';
+                }
+                
             }
         }
 
         return $data;
     }
 
-    // <li>
-    //                        <button class="pro__all__item active-pro-all" data-filter="all">
-    //                           <span>ALL</span>
-    //                        </button>
-    //                     </li>
-
-    //                     <li>
-    //                        <button class="pro__all__item">
-    //                           <span><i class="ri-computer-line"></i> PC</span>
-    //                        </button>
-    //                     </li>
-
-
-    //                     <li>
-    //                        <button class="pro__all__item">
-    //                           <span><i class="ri-macbook-line"></i> LAPTOP</span>
-    //                        </button>
-    //                     </li>
-
-    //                     <li>
-    //                        <button class="pro__all__item">
-    //                           <span><i class="ri-gamepad-line"></i> GAMING</span>
-    //                        </button>
-    //                     </li>
-
-
-    //                     <li>
-    //                        <button class="pro__all__item">
-    //                           <span><i class="ri-home-office-line"></i> OFFCIE</span>
-    //                        </button>
-    //                     </li>
 }

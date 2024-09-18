@@ -17,10 +17,11 @@
       <link rel="stylesheet" type="text/css" href="resources/css/styles.css">
       <link rel="stylesheet" type="text/css" href="resources/css/screen.css">
       <link rel="stylesheet" type="text/css" href="resources/css/cssDetailProduct.css">
+      <link rel="stylesheet" type="text/css" href="resources/css/cssCheckout.css">
 
-      <title>TTAN.STORE</title>
+      <title><?php $this->getData('page_title');?></title>
    </head>
-   <body class>
+   <body class="">
       <!--==================== HEADER ====================-->
       <header class="header" id="header">
          <nav class="nav container">
@@ -33,7 +34,7 @@
                   <ul class="nav__list">
 
                      <li class="">
-                        <a href="index.php" class="nav__link">Home</a>
+                        <a href="<?php echo SITE_PATH . "index.php"?>" class="nav__link">Home</a>
                      </li>
 
                      <!--==================== Products Dropdown ====================-->
@@ -147,22 +148,17 @@
 
                         <ul class="dropdown__menu">
                            <li>
-                              <a href="#" class="dropdown__link">
-                                 <i class="ri-user-3-line"></i> Profile
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#" class="dropdown__link">
+                              <a href="<?php echo SITE_PATH . "cart.php"; ?>" class="dropdown__link">
                                  <i class="ri-shopping-basket-2-fill"></i> Shopping cart
                               </a>
                            </li>
                            <li>
                               <a href="#" class="dropdown__link">
-                                 <i class="ri-logout-box-r-line"></i> Logout
+                                 <i class="ri-user-shared-fill"></i> Login
                               </a>
                            </li>
                         </ul>
-                     </li>   
+                     </li> 
                   </ul>
 
                   <!--Close button-->

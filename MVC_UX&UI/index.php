@@ -1,18 +1,40 @@
 <?php
 
-    include('app/init.php');
+include('app/init.php');
+$Template->setData('page_class', 'home');
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+  // get products from sprecific category
 
-    include 'app/views/includes/public_header.php';
-    include 'app/views/includes/all_products.php';
-    include 'app/views/includes/public_footer.php';
+  $category = $Categories->getCategories($_GET['id']);
 
-    $categories = $Categories->getCategories(1);
-    echo '<prev>';
-    print_r($categories);
-    echo '</prev>';
-    $category_nav = $Categories->getCategoryNav($categories['name_category']);
-    echo '<prev>';
-    print_r($category_nav);
-    echo '</prev>';
+  // check if valid
+  if (!empty($category)) {
+    // get category nav
+    $category_nav = $Categories->getCategoryNav($category['name']);
     $Template->setData('page_nav', $category_nav);
+
+    // get all products from that category
+    $cat_products = $Products->create_product($_GET['id']);
+
+    if (!empty($cat_products)) {
+      $Template->setData('products', $cat_products);
+    } else {
+      $Template->setData('products', '<li>No products exist in this category</li>');
+    }
+    $Template->load('app/views/v_public_home.php', $category['name']);
+  }
+} else {
+  // get all products from all categories
+
+  //get category nav
+  $category_nav = $Categories->getCategoryNav('all');
+  $Template->setData('page_nav', $category_nav);
+
+  //get products
+  $products = $Products->create_product();
+  $Template->setData('products', $products);
+
+  $Template->load('app/views/v_public_home.php', 'TTAN STORE');
+}
+
 ?>
